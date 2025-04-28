@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aanchal Yadav's Interactive Web Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .quiz-container, .joke-container {
+            margin: 20px 0;
+        }
+        .quiz-question {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .quiz-option {
+            display: block;
+            margin: 5px 0;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Aanchal Yadav's Web Fun Zone!</h1>
+       
+        <div class="quiz-container">
+            <div id="quiz-question" class="quiz-question"></div>
+            <div id="quiz-options"></div>
+            <button id="next-question" class="btn">Next Question</button>
+        </div>
+
+        <hr>
+
+        <div class="joke-container">
+            <button id="joke-button" class="btn">Tell me a joke!</button>
+            <p id="joke-text"></p>
+        </div>
+
+        <footer>
+            Created with love by Aanchal Yadav | 2025
+        </footer>
+    </div>
+
+    <script>
+        // Quiz data (customized)
+        const quizQuestions = [
+            {
+                question: "Which city is known as the cleanest city in India?",
+                options: ["Mumbai", "Indore", "Delhi", "Chennai"],
+                correctAnswer: "Indore"
+            },
+            {
+                question: "Who founded Microsoft?",
+                options: ["Steve Jobs", "Bill Gates", "Elon Musk", "Mark Zuckerberg"],
+                correctAnswer: "Bill Gates"
+            },
+            {
+                question: "Which language is essential for Web Development?",
+                options: ["Python", "JavaScript", "C++", "Swift"],
+                correctAnswer: "JavaScript"
+            },
+            {
+                question: "What is the national bird of India?",
+                options: ["Sparrow", "Peacock", "Crow", "Parrot"],
+                correctAnswer: "Peacock"
+            },
+            {
+                question: "HTML stands for?",
+                options: ["HyperText Markup Language", "HighText Machine Language", "Hyperloop Machine Language", "None of these"],
+                correctAnswer: "HyperText Markup Language"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        const quizQuestion = document.getElementById('quiz-question');
+        const quizOptions = document.getElementById('quiz-options');
+        const nextQuestionBtn = document.getElementById('next-question');
+
+        function loadQuestion() {
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            quizQuestion.textContent = currentQuestion.question;
+            quizOptions.innerHTML = "";
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('btn', 'quiz-option');
+                button.addEventListener('click', () => {
+                    if (option === currentQuestion.correctAnswer) {
+                        alert('Correct!');
+                    } else {
+                        alert('Wrong! Correct answer: ' + currentQuestion.correctAnswer);
+                    }
+                });
+                quizOptions.appendChild(button);
+            });
+        }
+
+        nextQuestionBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                quizQuestion.textContent = "You have completed the quiz!";
+                quizOptions.innerHTML = "";
+                nextQuestionBtn.style.display = 'none';
+            }
+        });
+
+        // Load the first question initially
+        loadQuestion();
+
+        // Jokes (customized jokes)
+        const myJokes = [
+            "Why did the computer catch a cold? It forgot to close its Windows!",
+            "Debugging: Being the detective in a crime movie where you are also the murderer.",
+            "Why don't skeletons fight each other? They don't have the guts.",
+            "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+            "I asked the IT guy, 'How do you make a motherboard?' He said, 'Tell her about my job!'"
+        ];
+
+        const jokeButton = document.getElementById('joke-button');
+        const jokeText = document.getElementById('joke-text');
+
+        jokeButton.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * myJokes.length);
+            jokeText.textContent = myJokes[randomIndex];
+        });
+    </script>
+</body>
+</html>
+
